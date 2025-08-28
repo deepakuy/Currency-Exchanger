@@ -302,14 +302,39 @@ async function populateCurrencyDropdowns() {
 
 // Set default currency selections
 function setDefaultCurrencies() {
+    // Only set defaults if the dropdowns are empty
+    if (fromCurrencySelect.options.length === 0) {
+        const defaultCurrencies = [
+            { code: 'USD', name: 'US Dollar' },
+            { code: 'EUR', name: 'Euro' },
+            { code: 'GBP', name: 'British Pound' },
+            { code: 'JPY', name: 'Japanese Yen' },
+            { code: 'AUD', name: 'Australian Dollar' },
+            { code: 'CAD', name: 'Canadian Dollar' },
+            { code: 'CHF', name: 'Swiss Franc' },
+            { code: 'CNY', name: 'Chinese Yuan' }
+        ];
+
+        // Populate both dropdowns with default currencies
+        defaultCurrencies.forEach(currency => {
+            const flag = getFlagEmoji(currency.code);
+            const option1 = document.createElement('option');
+            option1.value = currency.code;
+            option1.textContent = `${flag} ${currency.code} - ${currency.name}`;
+            
+            const option2 = option1.cloneNode(true);
+            
+            fromCurrencySelect.appendChild(option1);
+            toCurrencySelect.appendChild(option2);
+        });
+    }
+
     // Set USD as default from currency
     const usdOption = Array.from(fromCurrencySelect.options).find(
         option => option.value === 'USD'
     );
     if (usdOption) {
         usdOption.selected = true;
-        fromCurrencySelect.innerHTML = ''; // Clear and rebuild to ensure proper display
-        fromCurrencySelect.appendChild(usdOption);
     }
 
     // Set EUR as default to currency
@@ -318,8 +343,6 @@ function setDefaultCurrencies() {
     );
     if (eurOption) {
         eurOption.selected = true;
-        toCurrencySelect.innerHTML = ''; // Clear and rebuild to ensure proper display
-        toCurrencySelect.appendChild(eurOption);
     }
     
     // If no options were found, add default options
