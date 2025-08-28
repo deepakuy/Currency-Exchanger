@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern, accessible currency converter tool">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header" role="banner">
+        <h1>Currency Converter</h1>
+        <p class="subtitle">Convert between different currencies with live exchange rates</p>
+    </header>
+
+    <main class="container" role="main">
+        <form id="converter-form" class="converter-form" aria-label="Currency conversion form">
+            <div class="input-group">
+                <label for="amount">Amount</label>
+                <div class="input-with-icon">
+                    <input 
+                        type="number" 
+                        id="amount" 
+                        name="amount" 
+                        placeholder="0.00" 
+                        min="0" 
+                        step="0.01"
+                        aria-required="true"
+                        inputmode="decimal"
+                        autofocus>
+                </div>
+            </div>
+
+            <div class="currency-selectors">
+                <div class="input-group">
+                    <label for="from-currency">From</label>
+                    <select id="from-currency" name="from-currency" aria-label="Select source currency">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                    </select>
+                </div>
+
+                <button type="button" class="swap-btn" id="swap-currencies" aria-label="Swap currencies">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z" fill="currentColor"/>
+                    </svg>
+                </button>
+
+                <div class="input-group">
+                    <label for="to-currency">To</label>
+                    <select id="to-currency" name="to-currency" aria-label="Select target currency">
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="convert-btn">Convert</button>
+        </form>
+
+        <div class="results-panel" aria-live="polite">
+            <div class="result-card">
+                <h2>Result</h2>
+                <div id="result" class="result-amount" aria-live="polite">-</div>
+                <p class="result-label">Converted Amount</p>
+            </div>
+
+            <div class="rate-card">
+                <h3>Exchange Rate</h3>
+                <div id="exchange-rate" class="rate-amount" aria-live="polite">-</div>
+                <p class="rate-update">Rates update every minute</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>© 2025 Currency Converter. Exchange rates are for reference only.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
